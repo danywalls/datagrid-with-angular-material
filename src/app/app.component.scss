@@ -1,5 +1,12 @@
-table {
-    width: 90%;
-    margin:1rem auto;
- }
-
+.wrapper {
+    height: 300px;
+  }
+  
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .col-sm {
+    width: 70px;
+  }
