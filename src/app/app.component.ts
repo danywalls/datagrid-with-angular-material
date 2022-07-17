@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableVirtualScrollDataSource } from 'ng-table-virtual-scroll';
+import { NbAService } from './services/nba.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,49 +15,23 @@ export class AppComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  data = [
-    { name: 'Lebron James', team: 'Lakers' },
-    { name: 'Chef Curry', team: 'Golden State' },
-    { name: 'Anthony Davis', team: 'Lakers' },
-    { name: 'Klay Thompson', team: 'Golden State' },
-    { name: 'Carmelo Anthony', team: 'Lakers' },
-    { name: 'Patrick Bowell', team: 'Golden State' },
-    { name: 'Russell Westbrook', team: 'Lakers' },
-    { name: 'Chef Curry', team: 'Golden State' },
-    { name: 'Anthony Davis', team: 'Lakers' },
-    { name: 'Klay Thompson', team: 'Golden State' },
-    { name: 'Carmelo Anthony', team: 'Lakers' },
-    { name: 'Patrick Bowell', team: 'Golden State' },
-    { name: 'Russell Westbrook', team: 'Lakers' },
-    { name: 'Chef Curry', team: 'Golden State' },
-    { name: 'Anthony Davis', team: 'Lakers' },
-    { name: 'Klay Thompson', team: 'Golden State' },
-    { name: 'Carmelo Anthony', team: 'Lakers' },
-    { name: 'Patrick Bowell', team: 'Golden State' },
-    { name: 'Russell Westbrook', team: 'Lakers' },
-    { name: 'Chef Curry', team: 'Golden State' },
-    { name: 'Anthony Davis', team: 'Lakers' },
-    { name: 'Klay Thompson', team: 'Golden State' },
-    { name: 'Carmelo Anthony', team: 'Lakers' },
-    { name: 'Patrick Bowell', team: 'Golden State' },
-    { name: 'Russell Westbrook', team: 'Lakers' },
-    { name: 'Chef Curry', team: 'Golden State' },
-    { name: 'Anthony Davis', team: 'Lakers' },
-    { name: 'Klay Thompson', team: 'Golden State' },
-    { name: 'Carmelo Anthony', team: 'Lakers' },
-    { name: 'Patrick Bowell', team: 'Golden State' },
-    { name: 'Russell Westbrook', team: 'Lakers' },
-    { name: 'Chef Curry', team: 'Golden State' },
-    { name: 'Anthony Davis', team: 'Lakers' },
-    { name: 'Klay Thompson', team: 'Golden State' },
-    { name: 'Carmelo Anthony', team: 'Lakers' },
-    { name: 'Patrick Bowell', team: 'Golden State' },
-    { name: 'Russell Westbrook', team: 'Lakers' },
-  ];
+  constructor(private nbaService: NbAService) {
+
+
+
+  }
+
+
+
   ngOnInit(): void {
-    this.dataSource = new TableVirtualScrollDataSource(this.data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.nbaService.getData().subscribe((data) => {
+      this.dataSource = new TableVirtualScrollDataSource(data);
+    });
+
+
+    //this.dataSource = new TableVirtualScrollDataSource(this.data);
+    //this.dataSource.paginator = this.paginator;
+    //this.dataSource.sort = this.sort;
   }
 
   filter(event: Event) {

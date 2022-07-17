@@ -8,6 +8,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TableVirtualScrollModule } from 'ng-table-virtual-scroll';
+import { NbAService } from './services/nba.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,8 +21,11 @@ import { TableVirtualScrollModule } from 'ng-table-virtual-scroll';
     MatPaginatorModule,
     ScrollingModule,
     TableVirtualScrollModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    NbAService
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
